@@ -13,7 +13,7 @@ getAnswers=()=>{
     
     const data=Object.assign({}, this.props.question[0])
    const answers=data.answers[0];
-    const numCorrectAnswer=data.correctAnswers
+    
     return _.map(answers, (set, index)=>{
         return <Answer set={set} key={index} setNumber={index}  addAnswers={this.addAnswers}/>
     })
@@ -22,13 +22,26 @@ getAnswers=()=>{
 addAnswers=(value, setNumber)=>{
     const answerSet={setNumber: setNumber, value: value}
     this.props.addAnswers(answerSet)
+    
+}
+
+calculateAnswers=()=>{
+    console.log('working')
+   const corr= this.props.answers.map(item=>{
+       if(item.value===true)
+       return item
+   })
+   console.log('corr', corr)
+   const finalVal=corr.every(item=>{
+       return item
+   })
+   console.log('final val', finalVal)
 }
 
 
-
-
     render(){
-;
+        const answers= this.calculateAnswers()
+        
         if (this.props.question){
         let data=Object.assign({}, this.props.question[0])
         let question= data.question
@@ -36,6 +49,7 @@ addAnswers=(value, setNumber)=>{
         return <div className='container'>
                 <div>{question}:</div>
                 {this.getAnswers()}
+               
                </div>
     }else{
         return null
