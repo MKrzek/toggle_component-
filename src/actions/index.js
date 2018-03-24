@@ -5,7 +5,6 @@ import {
   QUESTION_ERROR
 } from "../constants.js";
 import { ADD_ANSWERS } from "../constants.js";
-import { CORRECT_ANSWER_FOUND } from "../constants";
 
 export function fetchQuestion() {
   return dispatch => {
@@ -38,14 +37,7 @@ export function fetchQuestionFailed() {
 }
 
 export function addAnswers(set) {
-  console.log('set', set)
   return dispatch => {
     dispatch({ type: ADD_ANSWERS, payload: set });
-  };
-}
-
-export function correctAnswerFound() {
-  return {
-    type: CORRECT_ANSWER_FOUND
   };
 }

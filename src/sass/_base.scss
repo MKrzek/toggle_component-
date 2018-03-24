@@ -100,7 +100,7 @@ div.question::first-letter{
 width: 710px;
   height: 365px;
   border-radius: 8px;
-  background-image: linear-gradient(to bottom, rgba(250, 145, 97, 0.5), rgba(247, 59, 28, 0.6));
+  background-image: linear-gradient(to bottom, rgba(250, 145, 97, 0.55), rgba(247, 59, 28, 0.6));
   box-shadow: 0 2px 12px 6px rgba(167, 196, 220, 0.5); 
 
 }
@@ -108,7 +108,7 @@ width: 710px;
 width: 710px;
   height: 365px;
   border-radius: 8px;
-  background-image: linear-gradient(to bottom, rgba(250, 145, 97, 0.37), rgba(247, 59, 28, 0.4));
+  background-image: linear-gradient(to bottom, rgba(250, 145, 97, 0.45), rgba(247, 59, 28, 0.5));
   box-shadow: 0 2px 12px 6px rgba(167, 196, 220, 0.5); 
 
 }
@@ -154,7 +154,6 @@ width: 710px;
 }
 
 .loader{
-  
   font-size: 20px;
  color: #ffffff;
   text-align:center

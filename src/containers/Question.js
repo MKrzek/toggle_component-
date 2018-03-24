@@ -3,14 +3,11 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import * as Actions from "../actions/index.js";
 import Answer from "../components/Answer.js";
-import CorrectAnswerLabel from "./CorrectAnswerLabel.js";
 
 class Question extends React.Component {
-
   componentDidMount() {
     this.props.fetchQuestion();
   }
-  
 
   getAnswers = () => {
     const data = Object.assign({}, this.props.question[0]);
@@ -34,15 +31,13 @@ class Question extends React.Component {
   };
 
   calculateAnswers = () => {
-    console.log("props answers", this.props.answers);
     if (this.props.answers) {
-
       let backGround = document.getElementById("app");
 
       let correctAnswers = this.props.answers.filter(item => {
         return item.value === true;
       });
-      console.log("corr", correctAnswers);
+
       if (correctAnswers.length > 0 && correctAnswers.length < 0) {
         backGround.clasName = "";
         backGround.classList.add("mask");
@@ -58,15 +53,26 @@ class Question extends React.Component {
       if (correctAnswers.length === 4) {
         backGround.className = "";
         backGround.classList.add("maskCorrect");
-
-        this.props.correctAnswerFound();
+        this.correctAnswerFound(correctAnswers.length);
+      }
+    }
+  };
+  correctAnswerFound = correctAnswers => {
+    if (correctAnswers === 4) {
+      let correctOptions = document.querySelectorAll("div.selectedOption");
+      for (let i = 0; i < correctOptions.length; i++) {
+        correctOptions[i].classList.remove("selectedOption");
+        correctOptions[i].classList.add("correctOption");
+        correctOptions[i].firstChild.classList.remove("selectedAnswer");
+        correctOptions[i].firstChild.classList.add("correctAnswer");
       }
     }
   };
 
-  
-
   render() {
+    let correctAnswers = this.props.answers.filter(item => {
+      return item.value === true;
+    });
     const { isLoading, isError } = this.props;
     if (this.props.question) {
       let data = Object.assign({}, this.props.question[0]);
@@ -74,13 +80,19 @@ class Question extends React.Component {
 
       return (
         <div className="mask" id="app">
-          {isLoading?  (<div className='loader'>Data is being loaded</div>): null}
-          {isError ? (<div className='error'>Error!</div>): null}
+          {isLoading ? (
+            <div className="loader">Data is being loaded</div>
+          ) : null}
+          {isError ? <div className="error">Error!</div> : null}
           <div className="question">{question}:</div>
 
           <div className="answers">{this.getAnswers()}</div>
           <div>{this.calculateAnswers()}</div>
-          <CorrectAnswerLabel />
+          {correctAnswers.length === 4 ? (
+            <div className="the-answer-is-incorr">The answer is correct!</div>
+          ) : (
+            <div className="the-answer-is-incorr">The answer is incorrect</div>
+          )}
         </div>
       );
     } else {
@@ -90,7 +102,6 @@ class Question extends React.Component {
 }
 
 function mapStateToProps(state) {
-  console.log("state.answers", state.answers);
   return {
     question: state.question.data,
     isLoading: state.question.isLoading,
