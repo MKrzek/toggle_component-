@@ -5,7 +5,7 @@ import Question from '../containers/Question.js'
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="rectangle">
         <Question/>
       </div>
     );
