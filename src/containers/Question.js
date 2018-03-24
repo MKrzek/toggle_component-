@@ -4,16 +4,20 @@ import _ from 'lodash';
 import * as Actions from '../actions/index.js';
 import Answer from './Answer.js';
 class Question extends React.Component{
+    constructor(props){
+        super(props);
+        this.state={
+            label:'This answer is incorrect'
+        }
+    }
 
 componentDidMount(){
     this.props.fetchQuestion()
 }
 
 getAnswers=()=>{
-    
     const data=Object.assign({}, this.props.question[0])
    const answers=data.answers[0];
-    
     return _.map(answers, (set, index)=>{
         return <Answer set={set} key={index} setNumber={index}  addAnswers={this.addAnswers}/>
     })
@@ -21,27 +25,28 @@ getAnswers=()=>{
 
 addAnswers=(value, setNumber)=>{
     const answerSet={setNumber: setNumber, value: value}
-    this.props.addAnswers(answerSet)
-    
+    this.props.addAnswers(answerSet)  
+    this.calculateAnswers()  
 }
 
 calculateAnswers=()=>{
-    console.log('working')
-   const corr= this.props.answers.map(item=>{
+   let correctAnswers= this.props.answers.map(item=>{
        if(item.value===true)
        return item
    })
-   console.log('corr', corr)
-   const finalVal=corr.every(item=>{
-       return item
-   })
-   console.log('final val', finalVal)
+   correctAnswers=correctAnswers.filter((n)=>( n !== undefined))
+   console.log('corr', correctAnswers)
+   console.log('corr length', correctAnswers.length)
+   if (correctAnswers.length===4){
+       this.setState({
+           label:'This answer is correct'
+       })
+   }
+
 }
 
 
     render(){
-        const answers= this.calculateAnswers()
-        
         if (this.props.question){
         let data=Object.assign({}, this.props.question[0])
         let question= data.question
@@ -49,7 +54,7 @@ calculateAnswers=()=>{
         return <div className='container'>
                 <div>{question}:</div>
                 {this.getAnswers()}
-               
+                <div>{this.state.label}</div>
                </div>
     }else{
         return null
