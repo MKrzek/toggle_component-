@@ -18,25 +18,30 @@ class Question extends React.Component {
           set={set}
           key={index}
           setNumber={index}
-          data-set-id={index}
           addAnswers={this.addAnswers}
         />
       );
     });
   };
 
-  addAnswers = (value, setNumber) => {
-    const answerSet = { setNumber: setNumber, value: value };
-    this.props.addAnswers(answerSet);
+  addAnswers = () => {
+    let allSelectedOptions = document.querySelectorAll("div.selectedOption");
+    let correctAnswers = [];
+    for (let i = 0; i < allSelectedOptions.length; i++) {
+      let value = allSelectedOptions[i].dataset.value;
+      if (value === "true") {
+        let setId = allSelectedOptions[i].dataset.id;
+        correctAnswers.push(setId);
+      }
+    }
+    this.props.addAnswers(correctAnswers);
   };
 
-  calculateAnswers = () => {
+  adjustBackground = () => {
     if (this.props.answers) {
       let backGround = document.getElementById("app");
-
-      let correctAnswers = this.props.answers.filter(item => {
-        return item.value === true;
-      });
+      console.log("this props answ", this.props.answers);
+      let correctAnswers = this.props.answers;
 
       if (correctAnswers.length > 0 && correctAnswers.length < 0) {
         backGround.clasName = "";
@@ -70,9 +75,8 @@ class Question extends React.Component {
   };
 
   render() {
-    let correctAnswers = this.props.answers.filter(item => {
-      return item.value === true;
-    });
+    let correctAnswers = this.props.answers;
+
     const { isLoading, isError } = this.props;
     if (this.props.question) {
       let data = Object.assign({}, this.props.question[0]);
@@ -87,7 +91,7 @@ class Question extends React.Component {
           <div className="question">{question}:</div>
 
           <div className="answers">{this.getAnswers()}</div>
-          <div>{this.calculateAnswers()}</div>
+          <div>{this.adjustBackground()}</div>
           {correctAnswers.length === 4 ? (
             <div className="the-answer-is-incorr">The answer is correct!</div>
           ) : (

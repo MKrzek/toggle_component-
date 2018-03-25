@@ -1,0 +1,27 @@
+@mixin answer-prototype($color) {
+  width: 200px;
+  height: 18px;
+  font-family: Muli;
+  font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.4px;
+  text-align: center;
+  color: $color;
+  padding-top: 12px;
+  padding-bottom: 15px;
+  padding-right: -6px;
+  margin-left: 3px;
+}
+@mixin option-prototype {
+  width: 195px;
+  border-radius: 100px;
+  background-color: rgba(249, 249, 249, 0.5);
+}
+@mixin mask-prototype {
+  width: 710px;
+  height: 365px;
+  border-radius: 8px;
+}

@@ -1,10 +1,7 @@
 import React from "react";
 
 export default class AnswerOption extends React.Component {
-
   handleClick = () => {
-   
-    this.props.getCorrectAnswer(this.props.option.value, this.props.setNumber);
     let id = this.props.optionid;
     let optionChosen = document.getElementById(id);
     let optionChosenChild = optionChosen.firstChild;
@@ -18,13 +15,19 @@ export default class AnswerOption extends React.Component {
     optionChosen.classList.add("selectedOption");
     optionChosenChild.classList.remove("option");
     optionChosenChild.classList.add("selectedAnswer");
+    this.props.getCorrectAnswer();
   };
 
   render() {
-    
-    const { option} = this.props.option;
+    const { option } = this.props.option;
+
     return (
-      <div onClick={this.handleClick} id={this.props.optionid}>
+      <div
+        onClick={this.handleClick}
+        id={this.props.optionid}
+        data-id={this.props.optionid}
+        data-value={this.props.option.value}
+      >
         <p className="option">{option}</p>
       </div>
     );

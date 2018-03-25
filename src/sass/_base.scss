@@ -1,10 +1,7 @@
-
-
 .rectangle {
   width: 1439px;
   height: 843px;
   background-color: #ffffff;
-  
 }
 .rectangle-5 {
   width: 400px;
@@ -15,7 +12,7 @@
   flex-direction: row;
   margin-top: 19px;
 }
-.question{
+.question {
   width: 728px;
   height: 18px;
   font-family: Muli;
@@ -29,115 +26,67 @@
   color: #ffffff;
   padding-top: 20px;
 }
-div.question::first-letter{
+div.question::first-letter {
   text-transform: capitalize;
 }
-.answers{
+.answers {
   padding-top: 30px;
   padding-left: 159px;
   padding-right: 199px;
 }
-.selectedOption{
-  width: 195px;
-   border-radius: 100px;
-  background-color: rgba(249, 249, 249, 0.5);
+.selectedOption {
+  @include option-prototype;
   box-shadow: 0 0 6px 1px rgba(195, 51, 51, 0.5);
- 
 }
 
 .correctOption {
-  width: 195px;
-  border-radius: 100px;
-  background-color: rgba(249, 249, 249, 0.5);
+  @include option-prototype;
   box-shadow: 0 0 6px 1px rgba(0, 115, 101, 0.5);
 }
 
-
 .selectedAnswer {
-  width: 200px;
-  height: 18px;
-  font-family: Muli;
-  font-size: 12px;
-  font-weight: bold;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: 0.4px;
-  text-align: center;
-  color: #e66549;
-  padding-top: 12px;
-  padding-bottom: 15px;
-  padding-right:-6px;
-  margin-left: 3px; 
+  @include answer-prototype($warm-color);
 }
-.correctAnswer{
-  width: 200px;
-  height: 18px;
-  font-family: Muli;
-  font-size: 12px;
-  font-weight: bold;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: 0.4px;
-  text-align: center;
-  color: #00b093;
-  padding-top: 12px;
-  padding-bottom: 15px;
-  padding-right:-6px;
-  margin-left: 3px; 
+.correctAnswer {
+  @include answer-prototype($cold-color);
 }
-
+.option {
+  @include answer-prototype($neutral-color);
+}
 
 .mask {
-  width: 710px;
-  height: 365px;
-  border-radius: 8px;
-  background-image: linear-gradient(to bottom, rgba(250, 145, 97, 0.7), rgba(247, 59, 28, 0.69));
-  box-shadow: 0 2px 12px 6px rgba(167, 196, 220, 0.5); 
+  @include mask-prototype;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(250, 145, 97, 0.7),
+    rgba(247, 59, 28, 0.69)
+  );
+  box-shadow: 0 2px 12px 6px rgba(167, 196, 220, 0.5);
 }
-.mask2{
-width: 710px;
-  height: 365px;
-  border-radius: 8px;
-  background-image: linear-gradient(to bottom, rgba(250, 145, 97, 0.55), rgba(247, 59, 28, 0.6));
-  box-shadow: 0 2px 12px 6px rgba(167, 196, 220, 0.5); 
-
+.mask2 {
+  @include mask-prototype;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(250, 145, 97, 0.55),
+    rgba(247, 59, 28, 0.6)
+  );
+  box-shadow: 0 2px 12px 6px rgba(167, 196, 220, 0.5);
 }
-.mask3{
-width: 710px;
-  height: 365px;
-  border-radius: 8px;
-  background-image: linear-gradient(to bottom, rgba(250, 145, 97, 0.45), rgba(247, 59, 28, 0.5));
-  box-shadow: 0 2px 12px 6px rgba(167, 196, 220, 0.5); 
-
+.mask3 {
+  @include mask-prototype;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(250, 145, 97, 0.45),
+    rgba(247, 59, 28, 0.5)
+  );
+  box-shadow: 0 2px 12px 6px rgba(167, 196, 220, 0.5);
 }
-.maskCorrect{
-  width: 710px;
-  height: 365px;
-  border-radius: 8px;
+.maskCorrect {
+  @include mask-prototype;
   background-image: linear-gradient(to bottom, #47e4c1, #07cddd);
   box-shadow: 0 2px 12px 6px rgba(167, 196, 220, 0.5);
-
 }
 
-.option {
-  width: 200px;
-  height: 18px;
-  font-family: Muli;
-  font-size: 12px;
-  font-weight: bold;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: 0.4px;
-  text-align: center;
-  color: #ffffff;
-  padding-top: 12px;
-  padding-bottom: 15px;
-  padding-right:-6px;
-  margin-left: 3px; 
-}
 .the-answer-is-incorr {
   width: 728px;
   height: 18px;
@@ -153,15 +102,15 @@ width: 710px;
   padding-top: 20px;
 }
 
-.loader{
+// Loaders and Errors
+
+.loader {
   font-size: 20px;
- color: #ffffff;
-  text-align:center
-}
-.error{
-  text-align: center;
-   font-size: 20px;
   color: #ffffff;
-
+  text-align: center;
 }
-
+.error {
+  text-align: center;
+  font-size: 20px;
+  color: #ffffff;
+}
